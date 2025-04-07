@@ -7,14 +7,15 @@
 ./qemu_run_zsbl.sh
 
 # 2
-./build_opensbi.sh
 ./qemu_run_opensbi_dynamic.sh
 
 # 3
-./build_opensbi.sh
-cd ./qemu-kernel-payload && make payload  && ../
+make -C ./qemu-kernel-payload
 ./qemu_run_opensbi_and_kernel.sh
 
 ```
 
-> For debbuging run: `./<script-name> -S -s` and connect with `./gdb-connect.sh`
+## GDB 
+./qemu_run_<script_name> -S -s # from one shell session
+./gdb_attach_disassebmle.sh    # from another shell session
+

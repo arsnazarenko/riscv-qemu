@@ -1,4 +1,6 @@
 #!/bin/bash
 
-qemu-system-riscv64 -machine virt  -bios ../opensbi/build/platform/generic/firmware/fw_dynamic.bin --nographic -serial mon:stdio $1
+OPENSBI_BIN=${OPENSBI_BIN:-../build/platform/generic/firmware/fw_dynamic.bin}
+
+qemu-system-riscv64 -machine virt  -bios ${OPENSBI_BIN} --nographic -serial mon:stdio $1
 

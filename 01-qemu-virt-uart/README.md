@@ -11,12 +11,13 @@ Demonstration of printing via UART in qemu riscv virt machine
 ## Run
 
 ```sh
-cd ./qemu-bios-payload 
-make 
-cd ../
-
+make -C ./qemu-bios-payload
 ./qemu_run_elf.sh
 ```
 
+## GDB
 
-> For debbuging run: ./qemu_<script-name> -S -s and connect with ./gdb-connect.ss
+```sh
+./qemu_run_elf.sh -S -s     # from one shell session
+./gdb_attach_disassebmle.sh # from another shell session
+```

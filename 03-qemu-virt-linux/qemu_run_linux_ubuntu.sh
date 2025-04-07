@@ -2,7 +2,11 @@
 
 set -e
 
-. ./artifacts.sh
+OPENSBI_BIN = ../build/platform/generic/firmware/fw_dynamic.bin
+OPENSBI_ELF = ../opensbi/build/platform/generic/firmware/fw_dynamic.elf
+LINUX_ELF = ../linux/vmlinux
+LINUX_BIN = ../linux/arch/riscv/image
+UBUNTU_ROOTFS_IMG = ./ubuntu22.04.img
 
 qemu-system-riscv64 \
     -smp 4 \
@@ -13,7 +17,7 @@ qemu-system-riscv64 \
     -kernel ${LINUX_BIN} \
     -append "root=/dev/vda1  console=ttyS0" \
     -device virtio-blk-device,drive=hd0 \
-    -drive file=./build-output/ubuntu-24.04.img,if=none,format=raw,id=hd0 \
+    -drive file=${UBUNTU_ROOTFS_IMG},if=none,format=raw,id=hd0 \
     -device virtio-net-device,netdev=net0 \
     -netdev user,id=net0,hostfwd=tcp::2345-:2345,hostfwd=tcp::2222-:22,hostfwd=tcp::5900-:5900 \
     -object rng-random,filename=/dev/urandom,id=rng0 \
